@@ -17,7 +17,7 @@ Using pip:
 
 # Usage
 
-Typical usage looks like this::
+Typical usage looks like this:
 
 ```
     from flask import Flask
@@ -32,14 +32,18 @@ Typical usage looks like this::
     app = Flask(__name__)
     app.config.from_object(__name__)
     arango = Arango(app)
-    arango.gdb.createVertex('MyCollection', {'name': 'my document'})
-    print arango.db.AQLQuery(
-        """
-        FOR doc in MyCollection
-            RETURN doc
-        """,
-        batchSize=1
-        )
+
+    @app.route('/')
+    def index():
+        arango.gdb.createVertex('MyCollection', {'name': 'my document'})
+        res = arango.db.AQLQuery(
+            """
+            FOR doc in MyCollection
+                RETURN doc
+            """,
+            batchSize=1
+            )
+        return res[0]['name'] 
 ```
 
 # Links
