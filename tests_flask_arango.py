@@ -65,7 +65,7 @@ class FlaskArangoGraphTests(FlaskRequestTests):
         if not self.arango.connection.hasDatabase('flask_arango_test'):
             self.arango.connection.createDatabase('flask_arango_test')
 
-        class EdgeTest(Edges):  # pylint: disable=no-init
+        class EdgeTest(Edges):
             pass
 
         class FromTest(Collection):

@@ -1,4 +1,4 @@
-from flask import current_app, _app_ctx_stack
+from flask import _app_ctx_stack
 
 from pyArango.connection import Connection
 
@@ -11,6 +11,7 @@ class Arango(object):
             self.init_app(app)
 
     def init_app(self, app):
+        self.app = app
         app.teardown_appcontext(self._teardown)
 
     def _teardown(self, exception):
@@ -26,13 +27,13 @@ class Arango(object):
         ctx = _app_ctx_stack.top
         if ctx is not None:
             if not hasattr(ctx, 'arango'):
-                ctx.arango = Connection(current_app.config['ARANGO_URL'])
+                ctx.arango = Connection(self.app.config['ARANGO_URL'])
             return ctx.arango
 
     @property
     def db(self):  # pylint: disable=invalid-name
-        return self.connection[current_app.config['ARANGO_DB']]
+        return self.connection[self.app.config['ARANGO_DB']]
 
     @property
     def gdb(self):
-        return self.db.graphs[current_app.config['ARANGO_GRAPH']]
+        return self.db.graphs[self.app.config['ARANGO_GRAPH']]
