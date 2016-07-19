@@ -11,7 +11,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Arango',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/grucin/flask-arango',
     license='Apache License, 2.0',
     author='Grzegorz Rucinski',
@@ -23,7 +23,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'Flask >= 0.10',
-        'pyArango >= 1.0.3'
+        'pyArango >= 1.1.0'
     ],
     classifiers=[
         'Intended Audience :: Developers',
