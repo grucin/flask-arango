@@ -10,8 +10,8 @@ These capabilities are made possible by the library:
 
 Using pip:
 
-```
-    pip install flask-arango
+```bash
+pip install flask-arango
 ```
 
 
@@ -19,31 +19,31 @@ Using pip:
 
 Typical usage looks like this:
 
-```
-    from flask import Flask
+```python
+from flask import Flask
 
-    from flask_arango import Arango
+from flask_arango import Arango
 
-    # Configuration
-    ARANGO_URL = 'http://localhot:8529'
-    ARANGO_DB = 'flask'
-    ARANGO_GRAPH = 'my_graph'
+# Configuration
+ARANGO_URL = 'http://localhot:8529'
+ARANGO_DB = 'flask'
+ARANGO_GRAPH = 'my_graph'
 
-    app = Flask(__name__)
-    app.config.from_object(__name__)
-    arango = Arango(app)
+app = Flask(__name__)
+app.config.from_object(__name__)
+arango = Arango(app)
 
-    @app.route('/')
-    def index():
-        arango.gdb.createVertex('MyCollection', {'name': 'my document'})
-        res = arango.db.AQLQuery(
-            """
-            FOR doc in MyCollection
-                RETURN doc
-            """,
-            batchSize=1
-            )
-        return res[0]['name'] 
+@app.route('/')
+def index():
+    arango.gdb.createVertex('MyCollection', {'name': 'my document'})
+    res = arango.db.AQLQuery(
+        """
+        FOR doc in MyCollection
+            RETURN doc
+        """,
+        batchSize=1
+        )
+    return res[0]['name'] 
 ```
 
 # Links
