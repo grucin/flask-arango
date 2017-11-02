@@ -1,4 +1,4 @@
 Flask==0.10.1
-git+https://github.com/tariqdaouda/pyArango.git@cb242a
+pyArango==1.1.0
 nose==1.3.7
 setuptools==18.4

@@ -27,7 +27,7 @@ class Arango(object):
         ctx = _app_ctx_stack.top
         if ctx is not None:
             if not hasattr(ctx, 'arango'):
-                ctx.arango = Connection(self.app.config['ARANGO_URL'])
+                ctx.arango = Connection(arangoURL=self.app.config['ARANGO_URL'],username=self.app.config['ARANGO_USERNAME'],password=self.app.config['ARANGO_PASSWORD'])
             return ctx.arango
 
     @property
